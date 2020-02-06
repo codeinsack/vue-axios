@@ -16,7 +16,7 @@
       }
     },
     created() {
-      axios.get('/users.json')
+      axios.get('accounts:users')
         .then(({ data }) => {
           const users = []
           for (let key in data) {
