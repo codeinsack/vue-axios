@@ -2,6 +2,7 @@
   <div id="dashboard">
     <h1>That's the dashboard!</h1>
     <p>You should only get here if you're authenticated!</p>
+    <p>Your email address: {{ email }}</p>
   </div>
 </template>
 
@@ -9,9 +10,23 @@
   import axios from 'axios'
 
   export default {
+    data() {
+      return {
+        email: '',
+      }
+    },
     created() {
-      axios.get('https://vue-axios-83dd8.firebaseio.com/users.json')
-        .then(response => console.log('response', response))
+      axios.get('/users.json')
+        .then(({ data }) => {
+          const users = []
+          for (let key in data) {
+            const user = data[key]
+            user.id = key
+            users.push(user)
+          }
+          console.log(users)
+          this.email = users[0].email
+        })
     },
   }
 </script>
