@@ -7,11 +7,10 @@
           <input
             type="email"
             id="email"
-            @blur="$v.email.$touch()"
-            v-model="email"
+            v-model.trim.lazy="$v.email.$model"
           >
           <p v-if="!$v.email.email">Please provide a valid email address</p>
-          <p v-if="!$v.email.required">This field can not be empty</p>
+          <p v-if="!$v.email.required && $v.email.$dirty">This field can not be empty</p>
         </div>
         <div class="input">
           <label for="age">Your Age</label>
