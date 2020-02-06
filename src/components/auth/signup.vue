@@ -5,9 +5,9 @@
         <div class="input">
           <label for="email">Mail</label>
           <input
-                  type="email"
-                  id="email"
-                  v-model="email">
+            type="email"
+            id="email"
+            v-model="email">
         </div>
         <div class="input">
           <label for="age">Your Age</label>
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+
   export default {
     data () {
       return {
@@ -102,7 +104,8 @@
           hobbies: this.hobbyInputs.map(hobby => hobby.value),
           terms: this.terms
         }
-        console.log(formData)
+        axios.post('https://vue-axios-83dd8.firebaseio.com/users.json', formData)
+          .then(response => console.log('response', response))
       }
     }
   }
