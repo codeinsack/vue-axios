@@ -118,6 +118,9 @@
       email: {
         required,
         email,
+        unique: value => {
+          return value !== 'test@test.test'
+        },
       },
       age: {
         required,
