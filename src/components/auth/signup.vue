@@ -101,6 +101,7 @@
     sameAs,
     requiredUnless,
   } from 'vuelidate/lib/validators'
+  import axios from 'axios'
 
   export default {
     data () {
@@ -120,10 +121,9 @@
         email,
         unique: value => {
           if (value === '') return true
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve(value !== 'test@test.test')
-            }, 2000)
+          return axios.get('/users.json?orderBy="email"&equalTo="' + value + '"')
+          .then(response => {
+            return Object.keys(response.data).length === 0
           })
         },
       },
