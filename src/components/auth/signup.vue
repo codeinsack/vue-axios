@@ -71,6 +71,7 @@
             <p v-if="!$v.hobbyInputs.minLen">
               You have to specify at least {{ $v.hobbyInputs.$params.minLen.min }} hobbies
             </p>
+            <p v-if="!$v.hobbyInputs.required">Please add hobbies</p>
           </div>
         </div>
         <div class="input inline" :class="{invalid: $v.terms.$error}">
