@@ -119,7 +119,12 @@
         required,
         email,
         unique: value => {
-          return value !== 'test@test.test'
+          if (value === '') return true
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(value !== 'test@test.test')
+            }, 2000)
+          })
         },
       },
       age: {
